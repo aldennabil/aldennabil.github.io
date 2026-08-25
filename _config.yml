@@ -203,7 +203,6 @@ collections:
   projects:
     output: true
 
-enable_project_categories: true
 
 # -----------------------------------------------------------------------------
 # Jekyll settings
