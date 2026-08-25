@@ -2,10 +2,10 @@
 layout: page
 permalink: /projects/
 title: projects
-description: A selection of work in statistics, machine learning, and data engineering.
+description: A selection of work in time series forecasting, risk analytics, machine learning, and applied statistics.
 nav: true
 nav_order: 2
-display_categories: [risk, ml, engineering, stats, nlp]
+display_categories: [timeseries, risk, ml, analytics, stats, nlp]
 horizontal: false
 ---
 

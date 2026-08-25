@@ -1,189 +1,95 @@
 cv:
-  name: Albert Einstein
-  label: Scientist
-  email: einstein@example.com
-  location: Princeton, NJ
+  name: Alden Nabil Wibowo Effendy
+  label: Statistics & Data Science
+  email: aldennabil31@gmail.com
+  location: Bogor, Indonesia
   image: ""
-  summary: A German-born theoretical physicist, widely ranked among the greatest and most influential scientists of all time
+  summary: >
+    Analytical and growth-oriented Data Science student (GPA: 3.83) skilled in translating raw,
+    disparate datasets into interactive visualizations and automated tools. Leverages programming
+    expertise (Python, R, SQL) to drive Machine Learning and Time Series modeling within economic,
+    financial risk, and renewable energy domains.
 
   social_networks:
-    - network: X
-      username: AlbertEinstein
     - network: GitHub
-      username: example
+      username: aldennabil
     - network: LinkedIn
-      username: example
-
-  address:
-    street: 2712 Broadway St
-    city: San Francisco
-    region: California
-    postalCode: CA 94115
-    countryCode: US
+      username: aldennabil
 
   sections:
     Education:
-      - institution: University of Zurich
-        location: Zurich, Switzerland
-        url: https://www.uzh.ch/
-        area: Physics
-        studyType: PhD
-        start_date: 1900
-        end_date: 1905
-        score: ""
-        courses: "Theory of Relativity"
+      - institution: IPB University
+        location: Bogor, Indonesia
+        area: Statistics and Data Science
+        studyType: Bachelor of Science (Undergraduate)
+        start_date: 2023
+        end_date: Present
+        score: "GPA: 3.83 / 4.00"
         highlights:
-          - Description 1.
-          - Description 2.
+          - "Relevant Coursework: Time Series Forecasting Methods, Survival Analysis, Machine Learning Techniques, Statistical Optimization, Spatial Regression, Multivariate Techniques, Data Engineering Programming, Statistical Computation, Relational Data Management, Regression Analysis, Probability Theory."
 
-      - institution: Eidgenössische Technische Hochschule
-        location: Zurich, Switzerland
-        area: Physics
-        studyType: Federal teaching diploma
-        start_date: 1896
-        end_date: 1900
+    Honors and Awards:
+      - title: 3rd Winner & Most Applicable
+        awarder: Gammafest Data Science Competition 2026
+        date: 2026-06-01
+        summary: >
+          Engineered an end-to-end predictive ML pipeline for international football match outcomes across 121,000+ matches (154 years of data).
+          Resolved severe 47 vs 20 variable feature disparity via adaptive chronological Elo rating reconstruction.
+          Built hybrid LightGBM Poisson goal estimators and multi-class outcome classifiers with Optuna Bayesian optimization, cutting non-linear AW-MAE from 2.69 to 1.98.
+
+    Certifications:
+      - name: BNSP Data Analyst
+        issuer: LSP TIK Global
+        date: 2026
+      - name: TOEIC English Proficiency (Score 930 / 990)
+        issuer: International Language Academy (ILA) IPB
+        date: 2025
+      - name: Project Management Ready (PMR)
+        issuer: Project Management Institute (PMI)
+        date: 2024
+      - name: Learn Tableau by Working on Exciting Dashboards
+        issuer: Udemy
+        date: 2025
+
+    Organizational Experience:
+      - company: Society of Renewable Energy (SRE), IPB Chapter
+        position: Head of External and Public Relations
+        location: Bogor, Indonesia
+        start_date: 2025-01-01
+        end_date: 2026-01-01
         highlights:
-          - Description 1.
-          - Description 2.
+          - "Secured 10 strategic media partnerships and orchestrated 2 major inter-organizational study events, expanding brand reach to 100+ active participants."
+          - "Directed external relations strategies and stakeholder engagement for sustainable operational growth."
 
-    Experience:
-      - company: Institute for Advanced Study, Princeton University
-        position: Professor of Theoretical Physics
-        location: Princeton University, NJ
-        start_date: 1933
-        end_date: 1955
-        summary: Teaching at Palmer Physical Laboratory (now 302 Frist Campus Center). While not a professor at Princeton, I associated with the physics professors and continued to give lectures on campus.
+      - company: Gamma Sigma Beta
+        position: Merchant Specialist – External & Creative Economics Dept
+        location: Bogor, Indonesia
+        start_date: 2025-01-01
+        end_date: 2026-01-01
         highlights:
-          - Relativity
-          - Description 2.
+          - "Marketed and liquidated 100+ branded merchandise items at Statistics Alumnus Gathering for 200+ attendees."
+          - "Coordinated inter-university benchmarking event with Universitas Padjadjaran Statistics student association (220 participants)."
+          - "Spearheaded the engineering and administration of a central alumni relational database tracing graduate records back to 2005."
 
-      - company: California Institute of Technology
-        position: Visiting Professor
-        location: Pasadena, California, US
-        start_date: 1933
-        end_date: 1933
+      - company: STEM 2024
+        position: Project Leader
+        location: Bogor, Indonesia
+        start_date: 2024-07-01
+        end_date: 2024-11-01
         highlights:
-          - Description 1.
-          - Description 2.
+          - "Upskilled 77 high school students in Design Thinking and AI development (4.72/5 program satisfaction score)."
+          - "Orchestrated full seminar lifecycle leading 32-person committee and coordinating 3 industry-expert guest speakers."
 
-      - company: Kaiser Wilhelm Institute for Physics
-        position: Director
-        location: Berlin, Germany
-        start_date: 1917
-        end_date: 1933
-
-      - company: Karl-Ferdinand University
-        position: Professor of Theoretical Physics
-        location: Prague, Czechoslovakia
-        start_date: 1911
-        end_date: 1917
-
-      - company: University of Zurich
-        position: Associate Professor of Theoretical Physics
-        location: Zurich, Switzerland
-        start_date: 1909
-        end_date: 1911
-
-    Volunteer:
-      - company: People's Climate March
-        position: Lead Organizer
-        location: Zurich, Switzerland
-        start_date: 2014-04-01
-        end_date: 2015-07-01
-        summary: Lead organizer for the New York City branch of the People's Climate March, the largest climate march in history.
-        highlights:
-          - "Awarded 'Climate Hero' award by Greenpeace for my efforts organizing the march."
-          - "Men of the year 2014 by Time magazine"
-
-    Awards:
-      - title: Nobel Prize in Physics
-        authors:
-          - "Royal Swedish Academy of Sciences"
-        date: 1921-11-01
-        awarder: Royal Swedish Academy of Sciences
-        url: https://www.nobelprize.org/prizes/physics/1921/einstein/biographical/
-        summary: The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'
-
-      - title: Max Planck Medal
-        authors:
-          - "German Physical Society"
-        date: 2029
-        awarder: German Physical Society
-        summary: Awarded for outstanding scientific achievement
-
-    Publications:
-      - title: Zur Elektrodynamik bewegter Körper
-        authors:
-          - Albert Einstein
-        publisher: Annalen der Physik
-        releaseDate: 1905-06-30
-        url: https://en.wikisource.org/wiki/Translation:On_the_Electrodynamics_of_Moving_Bodies
-        summary: It concerned an interpretation of the Michelson–Morley experiment and the properties of light and time. Special relativity incorporates the principle that the speed of light is the same for all inertial observers regardless of the state of motion of the source.
-
-      - title: Über einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt
-        authors:
-          - Albert Einstein
-        publisher: Annalen der Physik
-        releaseDate: 1905-03-18
-        url: https://de.wikisource.org/wiki/Über_einen_die_Erzeugung_und_Verwandlung_des_Lichtes_betreffenden_heuristischen_Gesichtspunkt
-        summary: In the second paper, he applied the quantum theory to light to explain the photoelectric effect. In particular, he used the idea of light quanta (photons) to explain experimental results, but stressed the importance of the experimental results. The importance of his work on the photoelectric effect earned him the Nobel Prize in Physics in 1921.
-
-      - title: Die Grundlage der allgemeinen Relativitätstheorie
-        authors:
-          - Albert Einstein
-        publisher: Annalen der Physik
-        releaseDate: 1916-03-20
-        url: https://de.wikisource.org/wiki/Die_Grundlage_der_allgemeinen_Relativitätstheorie
-        summary: The publication of the theory of general relativity made him internationally famous. He was professor of physics at the universities of Zurich (1909–1911) and Prague (1911–1912), before he returned to ETH Zurich (1912–1914).
-
-    Skills:
-      - name: Physics
-        level: Master
-        icon: fa-solid fa-hashtag
-        keywords: "Quantum Mechanics, Quantum Computing, Quantum Information, Quantum Cryptography, Quantum Communication, Quantum Teleportation"
-
-    Languages:
-      - name: German
-        summary: "Native speaker"
-
-      - name: English
-        summary: "Fluent"
-
-    Interests:
-      - name: Physics
-        icon: fa-solid fa-tag
-        keywords: "Quantum Mechanics, Quantum Computing, Quantum Information, Quantum Cryptography, Quantum Communication, Quantum Teleportation"
-
-    Certificates:
-      - name: Machine Learning
-        date: 2018-01-01
-        issuer: Stanford University
-        icon: fa-solid fa-location-dot
-
-      - name: Quantum Computing
-        date: 2018-01-01
-        issuer: Stanford University
-        icon: fa-solid fa-tag
-
-      - name: Quantum Information
-        date: 2018-01-01
-        issuer: Stanford University
-        icon: fa-solid fa-envelope
-
-    Projects:
-      - name: Quantum Computing
-        summary: Quantum computing is the use of quantum-mechanical phenomena such as superposition and entanglement to perform computation. Computers that perform quantum computations are known as quantum computers.
-        highlights:
-          - Quantum Teleportation
-          - Quantum Cryptography
-        start_date: 2018-01-01
-        end_date: 2018-01-01
-
-    References:
-      - name: Professor John Doe
-        icon: fa-solid fa-laptop
-        reference: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit.
-
-      - name: Professor Jane Smith
-        icon: fa-solid fa-thumbtack
-        reference: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit.
+    Skills & Interests:
+      - name: Technical Skills
+        level: ""
+        keywords: ["R", "Python", "SQL", "Microsoft Excel", "SPSS", "Tableau", "PowerBI", "Figma", "Canva"]
+      - name: Soft Skills
+        level: ""
+        keywords: ["Data-Driven Decision Making", "Teamwork", "Project Leadership", "Event Management", "Team Building", "Design Thinking"]
+      - name: Languages
+        level: ""
+        keywords: ["Indonesian (Native)", "English (Fluent - TOEIC 930)"]
+      - name: Research & Domain Interests
+        level: ""
+        keywords: ["Time Series Analysis", "Big Data", "Machine Learning", "Risk Analysis", "Sustainability & Renewable Energy", "Economics", "Technology"]

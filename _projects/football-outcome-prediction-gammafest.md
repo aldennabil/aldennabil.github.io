@@ -1,57 +1,49 @@
 ---
 layout: page
 title: "Football Match Outcome Prediction"
-description: "Ensemble machine learning for three-class match result prediction (H/D/A) — 3rd place, GammaFest 2025 Data Science Competition."
+description: "End-to-end ML pipeline with Elo rating reconstruction and hybrid LightGBM models across 121,000+ matches — 3rd Winner & Most Applicable, Gammafest 2026."
 img: assets/img/projects/football-outcome-prediction-gammafest.png
 importance: 2
 category: ml
-tags: [Python, XGBoost, LightGBM, Scikit-learn, Ensemble]
+tags: [Python, LightGBM, Optuna, Feature Engineering, Elo Rating, Time Series]
 github: https://github.com/aldennabil/football-outcome-prediction-gammafest
 status: complete
-year: 2025
+year: 2026
 competition:
-  name: "GammaFest 2025 Data Science Competition"
-  result: "3rd Place"
+  name: "Gammafest Data Science Competition 2026"
+  result: "3rd Winner & Most Applicable"
+featured: true
 ---
 
-## Problem
+## Competition Overview
 
-Football match outcome prediction is a three-class classification problem — Home Win, Draw, or Away Win — with high inherent variance and systematic class imbalance (draws are underrepresented). The task required a model that generalizes across leagues and seasons without data leakage from future match information.
+In the **Gammafest Data Science Competition 2026**, teams were challenged to engineer an end-to-end predictive machine learning pipeline to forecast international football scores and 3-class match outcomes across **121,000+ matches spanning 154 years of historical data (1872–2026)**.
 
-## Approach
+The solution achieved **3rd Place and the "Most Applicable" Award** among nationwide university competitors.
 
-{% include figure.liquid
-   path="assets/img/projects/football-outcome-prediction-gammafest.png"
-   class="img-fluid rounded"
-   caption="Feature importance from the stacked ensemble. ELO rating differential and rolling goal difference were the strongest predictors; raw match metadata alone produced near-baseline results." %}
+---
 
-Feature engineering was the critical differentiator:
+## Technical Challenges & Key Innovations
 
-- **ELO ratings** — Team strength scores updated incrementally after each match, using the standard ELO update formula with a K-factor calibrated to the dataset
-- **Rolling statistics** — Win rate, goal difference, and clean sheet rate computed over 5, 10, and 20-match windows to capture current form
-- **Temporal cross-validation** — Splits by season, not randomly, to prevent future data from leaking into training
+### 1. Severe Feature Disparity Resolution (47 Train vs. 20 Test Features)
+- A critical hurdle in the competition was a severe covariate mismatch: 47 variables were available in the training set, but only 20 metadata columns were provided in the evaluation set.
+- Developed an **adaptive chronological Elo rating reconstruction** and historical state-propagation mechanism across 154 years of international fixtures.
+- Generated **56 rich predictive metrics** (dynamic team strength differentials, home-field advantage scaling, rolling goal momentum, clean sheet probability) with **zero future data leakage**.
 
-Base learners (XGBoost, LightGBM, Logistic Regression) were trained independently, then their out-of-fold predictions served as features for a Ridge meta-learner — the stacking layer. An ablation study confirmed which feature groups drove performance.
+### 2. Hybrid Multi-Objective Modeling Architecture
+- Implemented a parallel ensemble architecture composed of:
+  - **Two Poisson Regression LightGBM Models**: Estimating expected goals for Home and Away sides independently.
+  - **One Multi-Class LightGBM Classifier**: Directly optimizing the probabilities of Home Win, Draw, and Away Win.
+- Coupled model outputs using **Optuna Bayesian Optimization** to minimize the competition's non-linear Asymmetric Weighted Mean Absolute Error (AW-MAE) evaluation loss.
 
-## Results
+---
 
-| Model | Weighted F1 |
-|-------|-------------|
-| Logistic Regression (baseline) | — |
-| XGBoost | — |
-| LightGBM | — |
-| **Stacked Ensemble** | **Best** |
+## Results & Impact
 
-**Competition outcome: 3rd Place — GammaFest 2025**
+| Metric / Stage | Baseline | Final Hybrid Pipeline | Improvement |
+|---|---|---|---|
+| **AW-MAE Loss** | 2.69 | **1.98** | **-26.4% Error Reduction** |
+| **Draw F1-Score** | 0.28 | **0.43** | **+15.0% Class Sensitivity** |
+| **Validation Scheme** | Random K-Fold (Overfitted) | **Chronological Out-of-Time CV** | **Robust Generalization** |
 
-Draw prediction improved by ~8 percentage points after Platt scaling threshold calibration, the hardest class across all runs.
-
-## Reflection
-
-Temporal leakage was the main trap: random k-fold inflated validation scores by a significant margin compared to season-based splits. The lesson transfers directly to financial time series — always validate on out-of-time data.
-
-<div class="repositories d-flex flex-wrap flex-md-row flex-column justify-content-between align-items-center">
-  <a href="https://github.com/aldennabil/football-outcome-prediction-gammafest" class="btn btn-sm z-depth-0" role="button" target="_blank">
-    View on GitHub
-  </a>
-</div>
+**Key Takeaway**: Preventing temporal data leakage through sequential state reconstruction was the single most decisive factor in building a model that generalized reliably to unseen future tournaments.

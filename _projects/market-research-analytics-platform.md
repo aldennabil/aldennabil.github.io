@@ -1,47 +1,50 @@
 ---
 layout: page
-title: "Market Research Analytics Platform"
-description: "Full-stack statistical system: ETL pipeline, SQLite normative database, and Streamlit dashboard for benchmarking product performance across survey categories."
+title: "Centralized Normative Database & Benchmarking Platform"
+description: "ETL pipeline, statistical norm calculation engine, and interactive Streamlit analytics platform consolidating 17 survey projects and 8,800+ observations."
 img: assets/img/projects/market-research-analytics-platform.png
-importance: 1
-category: engineering
-tags: [Python, SQLite, Streamlit, Pandas, ETL]
+importance: 3
+category: analytics
+tags: [Python, SQLite, Streamlit, ETL, Statistical Computing, Data Pipelines]
 github: https://github.com/aldennabil/market-research-analytics-platform
 status: complete
-year: 2025
+year: 2026
+featured: true
 ---
 
-## Problem
+## Overview
 
-Market research firms accumulate historical survey data across product categories and client studies. Without a centralized system, benchmarking a new product against historical norms requires manual, error-prone Excel work. This project replaces that process with a production-grade normative database and self-service dashboard.
+In commercial market research and sensory benchmarking, historical product evaluations are frequently fragmented across disparate spreadsheet formats, inconsistent scale conventions, and non-standardized column naming schemas.
 
-## Architecture
+This project delivered an end-to-end data platform that centralizes **17 disparate research projects (8,800+ individual consumer observations)** into a unified relational data warehouse, coupled with an automated statistical norm calculation engine and self-service analytics dashboard.
 
-{% include figure.liquid
-   path="assets/img/projects/market-research-analytics-platform.png"
-   class="img-fluid rounded"
-   caption="System architecture: survey workbooks ingested through a validated ETL pipeline into a SQLite database, queried in real time by a Streamlit dashboard." %}
+*(Client identity, proprietary brand names, and sensitive commercial survey contents are fully redacted).*
 
-The system is organized into four layers:
+---
 
-1. **Validation** — Schema checks, Likert naming format verification, straight-line respondent flagging, and casing standardization before any write operation
-2. **ETL Pipeline** — Parses Excel workbooks, separates 5-point and 7-point Likert scales, and loads structured records into SQLite using WAL journal mode for fast concurrent writes
-3. **Norm Cache** — Pre-computed percentile cutoffs, Top Box (T2B/T3B), and mean scores stored at ingestion time for sub-second dashboard queries
-4. **Streamlit Dashboard** — Four pages: database overview, norm explorer with category filters, product comparator for benchmarking new entries, and a data ingestion portal with automated backup
+## Core System Architecture
 
-## Technical Highlights
+### 1. Robust Ingestion & Automated Standardization ETL
+- Ingestion engine with automated schema validation and column mapping rules capable of parsing varied survey exports.
+- Standardizes diverse measurement formats (5-point, 7-point, and 9-point mixed Likert scales) into harmonized comparative metrics.
+- Enforces strict data integrity checks, duplicate detection, and automated backup routines.
 
-- Schema-enforced ingestion with 12 structural validation rules — invalid uploads are rejected with a detailed error log
-- Automated timestamped backups of both the SQLite database and ingested Excel files before every write
-- SQLite configured to WAL + NORMAL synchronous mode; norm queries return in under one second on the full dataset
-- Clean separation between research code (`research/`) and production source (`src/`, `app/`) — the dashboard has no dependency on development notebooks
+### 2. Algorithmic Statistical Norm Engine
+- Computes comprehensive parametric and non-parametric historical benchmarks across product categories:
+  - **Parametric Metrics**: Mean, Standard Deviation, Standard Error.
+  - **Top-Box Scores**: Top-Box (TB), Top-2-Box (T2B), and Top-3-Box (T3B) acceptance proportions.
+  - **Percentile Distributions**: 25th (P25), 50th (Median), and 75th (P75) percentile distributions.
 
-## Limitations
+### 3. Self-Service Streamlit Analytics Dashboard
+- Interactive web portal enabling research analysts and executive stakeholders to query historical normative baselines dynamically.
+- Allows self-service ingestion of newly completed survey datasets with instant benchmarking against historical category percentiles.
 
-Survey data is proprietary and not included in this repository. The system is designed for a specific Excel schema; adapting to other survey formats requires modifications to the validation and ETL layers.
+---
 
-<div class="repositories d-flex flex-wrap flex-md-row flex-column justify-content-between align-items-center">
-  <a href="https://github.com/aldennabil/market-research-analytics-platform" class="btn btn-sm z-depth-0" role="button" target="_blank">
-    View on GitHub
-  </a>
-</div>
+## Key Metrics & Impact
+
+| Metric | Before Implementation | After Implementation |
+|---|---|---|
+| **Benchmarking Turnaround** | 2–3 Days (Manual Excel Lookup) | **< 5 Seconds (Automated Engine)** |
+| **Data Coverage** | Dispersed in 17 separate files | **1 Unified Relational Database (8,800+ obs)** |
+| **Scale Compatibility** | Manual conversion prone to errors | **Algorithmic Standardization** |

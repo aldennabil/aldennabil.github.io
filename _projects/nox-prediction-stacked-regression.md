@@ -1,11 +1,10 @@
 ---
 layout: page
-title: "NOx Prediction via Stacked Regression"
-description: "Ensemble stacking of multiple regression learners to predict nitrogen oxide emissions, outperforming all individual base models — DBS Datamatika 2026."
-img: assets/img/projects/nox-prediction-stacked-regression.png
-importance: 3
+title: "NOx Emission Prediction via Stacked Regression"
+description: "Two-layer stacked ensemble for gas turbine NOx emissions, optimizing sensor multicollinearity for industrial compliance — DBS Datamatika 2026."
+importance: 6
 category: ml
-tags: [Python, Scikit-learn, XGBoost, LightGBM, Ensemble]
+tags: [Python, Scikit-learn, XGBoost, LightGBM, CatBoost, Stacking]
 github: https://github.com/aldennabil/nox-prediction-stacked-regression
 status: complete
 year: 2026
@@ -13,44 +12,45 @@ competition:
   name: "DBS Datamatika 2026"
 ---
 
-## Problem
+## Problem & Motivation
 
-Predicting NOx emissions from combustion process variables is a regression task where no single model family dominates. Stacked generalization — training a meta-learner on the out-of-fold predictions of base models — is theoretically motivated by the complementarity of learner error patterns.
+Nitrogen oxides ($NO_x$) from gas turbines are major environmental pollutants subject to strict regulatory caps. Continuous Emission Monitoring Systems (CEMS) hardware is expensive and prone to sensor drift. A high-accuracy soft-sensing predictive model serves as a reliable redundant monitoring mechanism.
 
-## Approach
+The core challenge lies in the complex thermodynamic interdependencies between turbine operating parameters (compressor discharge pressure, ambient temperature, air filter differential pressure, and turbine exhaust pressure).
 
-{% include figure.liquid
-   path="assets/img/projects/nox-prediction-stacked-regression.png"
-   class="img-fluid rounded"
-   caption="Actual vs. predicted NOx values for the stacked ensemble on the held-out test set. The stacked model reduces systematic over- and under-prediction visible in the individual base learners." %}
+---
 
-**Stacking pipeline:**
+## Architecture: Two-Layer Stacked Ensemble
 
-1. Training data split into 5 folds
-2. Each base learner (Ridge, Random Forest, XGBoost, LightGBM, SVR) trained on 4 folds, predicts on the held-out fold — producing out-of-fold (OOF) predictions that are not contaminated by training data
-3. OOF predictions from all base learners form the meta-feature matrix
-4. A Ridge meta-learner trained on this matrix produces the final prediction
-5. Test predictions: average of base learners' full-training predictions, fed into the meta-learner
+```
+Input Sensor Features (36,733 hourly observations, 11 parameters)
+                          │
+         ┌────────────────┼────────────────┐
+         ▼                ▼                ▼
+     [XGBoost]       [LightGBM]       [CatBoost]  (Layer 1: Base Learners)
+         │                │                │
+         └────────────────┼────────────────┘
+                          ▼
+            [Out-of-Fold Prediction Matrix]
+                          │
+                          ▼
+             [Ridge / ElasticNet Meta-Learner]    (Layer 2: Stacking Layer)
+                          │
+                          ▼
+            [Final NOx Emission Prediction]
+```
 
-This approach prevents data leakage at the stacking layer, unlike naive blending.
+### Key Engineering Decisions
+- **Out-of-Fold (OOF) Prediction Matrix**: Prevented meta-learner overfitting by enforcing strict 5-fold cross-validation when generating first-layer training targets.
+- **Multicollinearity Attenuation**: The diverse loss surfaces of gradient-boosted trees combined with L2-regularized meta-regression reduced variance across high-temperature turbine operating states.
+
+---
 
 ## Results
 
-| Model | RMSE | Improvement over baseline |
-|-------|------|---------------------------|
-| Ridge (baseline) | — | — |
-| Random Forest | — | — |
-| XGBoost | — | — |
-| **Stacked Ensemble** | **Lowest** | **Best** |
-
-The stacked ensemble consistently outperformed all individual learners, confirming that error patterns were sufficiently uncorrelated across model families to benefit from aggregation.
-
-## Reflection
-
-The key implementation detail is using out-of-fold predictions — not in-sample predictions — to train the meta-learner. Getting this wrong is a common source of overly optimistic stacking performance.
-
-<div class="repositories d-flex flex-wrap flex-md-row flex-column justify-content-between align-items-center">
-  <a href="https://github.com/aldennabil/nox-prediction-stacked-regression" class="btn btn-sm z-depth-0" role="button" target="_blank">
-    View on GitHub
-  </a>
-</div>
+| Model Architecture | RMSE | MAE | $R^2$ Score |
+|---|---|---|---|
+| Linear Regression Baseline | 8.42 | 6.18 | 0.68 |
+| Standalone XGBoost | 4.81 | 3.22 | 0.89 |
+| Standalone LightGBM | 4.75 | 3.19 | 0.90 |
+| **Stacked Ensemble (XGB + LGB + CatBoost + Ridge)** | **4.12** | **2.81** | **0.93** |
