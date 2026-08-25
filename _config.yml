@@ -204,7 +204,6 @@ collections:
     output: true
 
 enable_project_categories: true
-display_categories: [risk, ml, engineering, stats, nlp]
 
 # -----------------------------------------------------------------------------
 # Jekyll settings
@@ -352,8 +351,8 @@ display_categories: ["external-services"] # these categories will be displayed o
 # -----------------------------------------------------------------------------
 
 scholar:
-  last_name: [Einstein]
-  first_name: [Albert, A.]
+  last_name: [Effendy]
+  first_name: [Alden]
 
   style: apa
   locale: en
