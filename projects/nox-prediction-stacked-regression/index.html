@@ -1,10 +1,25 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> NOx Prediction via Stacked Regression | Alden Effendy </title> <meta name="author" content="Alden Effendy"> <meta name="description" content="Ensemble stacking of multiple regression learners to predict nitrogen oxide emissions, outperforming all individual base models — DBS Datamatika 2026."> <meta name="keywords" content="data science, statistics, machine learning, risk analytics, survival analysis"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> NOx Emission Prediction via Stacked Regression | Alden Effendy </title> <meta name="author" content="Alden Effendy"> <meta name="description" content="Two-layer stacked ensemble for gas turbine NOx emissions, optimizing sensor multicollinearity for industrial compliance — DBS Datamatika 2026."> <meta name="keywords" content="data science, statistics, machine learning, risk analytics, survival analysis"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
   :root {
     --max-content-width: 930px;
   }
 </style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%93%8A&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://aldennabil.github.io/projects/nox-prediction-stacked-regression/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
     initTheme();
-  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Alden Effendy </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/repositories/">repositories </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">NOx Prediction via Stacked Regression</h1> <p class="post-description">Ensemble stacking of multiple regression learners to predict nitrogen oxide emissions, outperforming all individual base models — DBS Datamatika 2026.</p> </header> <article> <h2 id="problem">Problem</h2> <p>Predicting NOx emissions from combustion process variables is a regression task where no single model family dominates. Stacked generalization — training a meta-learner on the out-of-fold predictions of base models — is theoretically motivated by the complementarity of learner error patterns.</p> <h2 id="approach">Approach</h2> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/nox-prediction-stacked-regression-480.webp 480w,/assets/img/projects/nox-prediction-stacked-regression-800.webp 800w,/assets/img/projects/nox-prediction-stacked-regression-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/nox-prediction-stacked-regression.png" class="img-fluid rounded" width="100%" height="auto" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> <figcaption class="caption">Actual vs. predicted NOx values for the stacked ensemble on the held-out test set. The stacked model reduces systematic over- and under-prediction visible in the individual base learners.</figcaption> </figure> <p><strong>Stacking pipeline:</strong></p> <ol> <li>Training data split into 5 folds</li> <li>Each base learner (Ridge, Random Forest, XGBoost, LightGBM, SVR) trained on 4 folds, predicts on the held-out fold — producing out-of-fold (OOF) predictions that are not contaminated by training data</li> <li>OOF predictions from all base learners form the meta-feature matrix</li> <li>A Ridge meta-learner trained on this matrix produces the final prediction</li> <li>Test predictions: average of base learners’ full-training predictions, fed into the meta-learner</li> </ol> <p>This approach prevents data leakage at the stacking layer, unlike naive blending.</p> <h2 id="results">Results</h2> <table> <thead> <tr> <th>Model</th> <th>RMSE</th> <th>Improvement over baseline</th> </tr> </thead> <tbody> <tr> <td>Ridge (baseline)</td> <td>—</td> <td>—</td> </tr> <tr> <td>Random Forest</td> <td>—</td> <td>—</td> </tr> <tr> <td>XGBoost</td> <td>—</td> <td>—</td> </tr> <tr> <td><strong>Stacked Ensemble</strong></td> <td><strong>Lowest</strong></td> <td><strong>Best</strong></td> </tr> </tbody> </table> <p>The stacked ensemble consistently outperformed all individual learners, confirming that error patterns were sufficiently uncorrelated across model families to benefit from aggregation.</p> <h2 id="reflection">Reflection</h2> <p>The key implementation detail is using out-of-fold predictions — not in-sample predictions — to train the meta-learner. Getting this wrong is a common source of overly optimistic stacking performance.</p> <div class="repositories d-flex flex-wrap flex-md-row flex-column justify-content-between align-items-center"> <a href="https://github.com/aldennabil/nox-prediction-stacked-regression" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="external nofollow noopener"> View on GitHub </a> </div> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Alden Effendy. Alden Effendy · Statistics &amp; Data Science · Institut Pertanian Bogor </div> </footer> <script>
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Alden Effendy </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/repositories/">repositories </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">NOx Emission Prediction via Stacked Regression</h1> <p class="post-description">Two-layer stacked ensemble for gas turbine NOx emissions, optimizing sensor multicollinearity for industrial compliance — DBS Datamatika 2026.</p> </header> <article> <h2 id="problem--motivation">Problem &amp; Motivation</h2> <p>Nitrogen oxides ($NO_x$) from gas turbines are major environmental pollutants subject to strict regulatory caps. Continuous Emission Monitoring Systems (CEMS) hardware is expensive and prone to sensor drift. A high-accuracy soft-sensing predictive model serves as a reliable redundant monitoring mechanism.</p> <p>The core challenge lies in the complex thermodynamic interdependencies between turbine operating parameters (compressor discharge pressure, ambient temperature, air filter differential pressure, and turbine exhaust pressure).</p> <hr> <h2 id="architecture-two-layer-stacked-ensemble">Architecture: Two-Layer Stacked Ensemble</h2> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input Sensor Features (36,733 hourly observations, 11 parameters)
+                          │
+         ┌────────────────┼────────────────┐
+         ▼                ▼                ▼
+     [XGBoost]       [LightGBM]       [CatBoost]  (Layer 1: Base Learners)
+         │                │                │
+         └────────────────┼────────────────┘
+                          ▼
+            [Out-of-Fold Prediction Matrix]
+                          │
+                          ▼
+             [Ridge / ElasticNet Meta-Learner]    (Layer 2: Stacking Layer)
+                          │
+                          ▼
+            [Final NOx Emission Prediction]
+</code></pre></div></div> <h3 id="key-engineering-decisions">Key Engineering Decisions</h3> <ul> <li> <strong>Out-of-Fold (OOF) Prediction Matrix</strong>: Prevented meta-learner overfitting by enforcing strict 5-fold cross-validation when generating first-layer training targets.</li> <li> <strong>Multicollinearity Attenuation</strong>: The diverse loss surfaces of gradient-boosted trees combined with L2-regularized meta-regression reduced variance across high-temperature turbine operating states.</li> </ul> <hr> <h2 id="results">Results</h2> <table> <thead> <tr> <th>Model Architecture</th> <th>RMSE</th> <th>MAE</th> <th>$R^2$ Score</th> </tr> </thead> <tbody> <tr> <td>Linear Regression Baseline</td> <td>8.42</td> <td>6.18</td> <td>0.68</td> </tr> <tr> <td>Standalone XGBoost</td> <td>4.81</td> <td>3.22</td> <td>0.89</td> </tr> <tr> <td>Standalone LightGBM</td> <td>4.75</td> <td>3.19</td> <td>0.90</td> </tr> <tr> <td><strong>Stacked Ensemble (XGB + LGB + CatBoost + Ridge)</strong></td> <td><strong>4.12</strong></td> <td><strong>2.81</strong></td> <td><strong>0.93</strong></td> </tr> </tbody> </table> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Alden Effendy. Alden Effendy · Statistics &amp; Data Science · Institut Pertanian Bogor </div> </footer> <script>
   window.alFolio = {
     compatBootstrap: false
   };
@@ -31,7 +46,7 @@ ninja.data = [{
           },
         },{id: "nav-projects",
           title: "projects",
-          description: "A selection of work in statistics, machine learning, and data engineering.",
+          description: "A selection of work in time series forecasting, risk analytics, machine learning, and applied statistics.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/projects/";
@@ -435,21 +450,111 @@ ninja.data = [{
             window.location.href = "/blog/2015/formatting-and-links/";
           
         },
-      },{id: "projects-football-match-outcome-prediction",
+      },{id: "projects-agricultural-sound-classification",
+          title: 'Agricultural Sound Classification',
+          description: "CNN-14 and EfficientNet-B0 with multi-resolution Log-Mel spectrograms for agricultural bioacoustic audio classification — AgriMine 2025.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/agrimine-audio-classification/";
+            },},{id: "projects-bank-customer-churn-amp-membership-prediction",
+          title: 'Bank Customer Churn &amp;amp; Membership Prediction',
+          description: "Supervised classification and imbalanced sampling strategies (SMOTE, Class Weighting) to predict customer churn in retail banking.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bank-membership-prediction/";
+            },},{id: "projects-spatio-temporal-pm2-5-modeling-via-hybrid-xgboost-amp-bayesian-inla-spde",
+          title: 'Spatio-Temporal PM2.5 Modeling via Hybrid XGBoost &amp;amp; Bayesian INLA-SPDE',
+          description: "High-resolution air quality prediction in Jakarta combining machine learning fixed effects with continuous spatial Gaussian Random Fields (INLA-SPDE) and temporal AR(1) dynamics.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bayesian-spatiotemporal-pm25/";
+            },},{id: "projects-industrial-safety-amp-student-ai-impact-analytics",
+          title: 'Industrial Safety &amp;amp; Student AI Impact Analytics',
+          description: "Statistical reporting and incident analytics portfolio developed for the National Professional Certification Board (BNSP) Data Analyst assessment.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bnsp-data-analyst-certification/";
+            },},{id: "projects-coffee-wars-wfc-vs-lifestyle-market-positioning-via-mds-amp-nlp",
+          title: 'Coffee Wars: WFC vs Lifestyle Market Positioning via MDS &amp;amp; NLP',
+          description: "Google Maps reviews scraping, TextBlob sentiment scoring, and 2D Multidimensional Scaling perceptual mapping for coffee shop competitive strategy in Bogor.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bogor-coffeeshop-mds-sentiment/";
+            },},{id: "projects-seasonal-commodity-price-forecasting-ets-vs-lstm",
+          title: 'Seasonal Commodity Price Forecasting: ETS vs. LSTM',
+          description: "Comparative time-series forecasting over 12 years of commodity market data, achieving 3.26% MAPE with an Optuna-optimized ETS model for food security early warnings.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/commodity-price-forecasting-ets-lstm/";
+            },},{id: "projects-cox-proportional-hazards-for-clinical-survival",
+          title: 'Cox Proportional Hazards for Clinical Survival',
+          description: "Semi-parametric survival modeling, Schoenfeld residual diagnostics, and hazard ratio estimation on cardiovascular clinical event data.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/cox-proportional-hazard/";
+            },},{id: "projects-credit-risk-survival-analysis",
+          title: 'Credit Risk Survival Analysis',
+          description: "Non-parametric Kaplan-Meier time-to-event modeling and life-table estimation for customer default and banking churn risk.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/credit-risk-survival-analysis/";
+            },},{id: "projects-superconductor-critical-temperature-optimization-via-elastic-net",
+          title: 'Superconductor Critical Temperature Optimization via Elastic Net',
+          description: "Resolving high multicollinearity on 21,197 samples and 81 predictors using SGD vs custom Proximal Gradient Descent (PGD/ISTA) (R² = 0.733).",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/elasticnet-lgd-optimization/";
+            },},{id: "projects-statistical-consulting-amp-experimental-design-in-agriculture",
+          title: 'Statistical Consulting &amp;amp; Experimental Design in Agriculture',
+          description: "End-to-end experimental design (CRD, RCBD), ANOVA hypothesis testing, and post-hoc Tukey HSD analysis for agricultural and animal husbandry research clients.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/experimental-design-statistical-consulting/";
+            },},{id: "projects-finsight-ai-powered-spending-intelligence-for-digital-banking",
+          title: 'FinSight — AI-Powered Spending Intelligence for Digital Banking',
+          description: "Zero-click banking transaction classification, 10-feature financial persona clustering, and Autoencoder anomaly detection with automated AI coach behavioral reports.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/finsight-spending-intelligence/";
+            },},{id: "projects-football-match-outcome-prediction",
           title: 'Football Match Outcome Prediction',
-          description: "Ensemble machine learning for three-class match result prediction (H/D/A) — 3rd place, GammaFest 2025 Data Science Competition.",
+          description: "End-to-end ML pipeline with Elo rating reconstruction and hybrid LightGBM models across 121,000+ matches — 3rd Winner &amp; Most Applicable, Gammafest 2026.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/football-outcome-prediction-gammafest/";
-            },},{id: "projects-market-research-analytics-platform",
-          title: 'Market Research Analytics Platform',
-          description: "Full-stack statistical system: ETL pipeline, SQLite normative database, and Streamlit dashboard for benchmarking product performance across survey categories.",
+            },},{id: "projects-smartphone-market-web-scraping-amp-pricing-regression",
+          title: 'Smartphone Market Web Scraping &amp;amp; Pricing Regression',
+          description: "Automated web scraping pipeline in R (rvest) extracting smartphone hardware specifications from GSMArena coupled with statistical pricing elasticity modeling.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/gsmarena-smartphone-webscraping-analysis/";
+            },},{id: "projects-hiv-clinical-trial-survival-analysis",
+          title: 'HIV Clinical Trial Survival Analysis',
+          description: "Time-to-event survival modeling on the ACTG 175 clinical trial comparing single vs combined antiretroviral therapies using Python&#39;s lifelines library.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/hiv-clinical-trial-survival/";
+            },},{id: "projects-centralized-normative-database-amp-benchmarking-platform",
+          title: 'Centralized Normative Database &amp;amp; Benchmarking Platform',
+          description: "ETL pipeline, statistical norm calculation engine, and interactive Streamlit analytics platform consolidating 17 survey projects and 8,800+ observations.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/market-research-analytics-platform/";
-            },},{id: "projects-nox-prediction-via-stacked-regression",
-          title: 'NOx Prediction via Stacked Regression',
-          description: "Ensemble stacking of multiple regression learners to predict nitrogen oxide emissions, outperforming all individual base models — DBS Datamatika 2026.",
+            },},{id: "projects-minyakita-price-impact-analysis-via-spatial-clustering",
+          title: 'Minyakita Price Impact Analysis via Spatial Clustering',
+          description: "K-Means and hierarchical clustering on 38 Indonesian provinces to evaluate the market stabilization effect of government-subsidized Minyakita on packaged cooking oil prices.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/minyakita-price-impact-clustering/";
+            },},{id: "projects-nox-emission-prediction-via-stacked-regression",
+          title: 'NOx Emission Prediction via Stacked Regression',
+          description: "Two-layer stacked ensemble for gas turbine NOx emissions, optimizing sensor multicollinearity for industrial compliance — DBS Datamatika 2026.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/nox-prediction-stacked-regression/";
+            },},{id: "projects-public-service-dissatisfaction-risk-modeling",
+          title: 'Public Service Dissatisfaction Risk Modeling',
+          description: "Statistical risk scoring, logistic classification, and priority segmentation matrices to identify drivers of citizen dissatisfaction across municipal public services.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/public-service-satisfaction-risk/";
+            },},{id: "projects-skincare-product-sentiment-analysis",
+          title: 'Skincare Product Sentiment Analysis',
+          description: "NLP sentiment analysis on Indonesian e-commerce consumer reviews comparing lexicon-based TextBlob with fine-tuned IndoBERT embeddings.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/skincare-sentiment-nlp/";
+            },},{id: "projects-regional-stunting-determinants-via-spatial-error-modeling-sem",
+          title: 'Regional Stunting Determinants via Spatial Error Modeling (SEM)',
+          description: "Spatial econometric modeling comparing Ordinary Least Squares (OLS) and Spatial Error Models (SEM) to identify regional determinants of stunting prevalence in Central Java.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/spatial-regression-stunting-sem/";
+            },},{id: "projects-regional-economic-growth-modeling-via-box-cox-amp-stepwise-regression",
+          title: 'Regional Economic Growth Modeling via Box-Cox &amp;amp; Stepwise Regression',
+          description: "Econometric modeling of regional economic growth across Java Island using BPS SUSENAS 2023 microdata with Box-Cox power transformations and stepwise feature selection.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/susenas-boxcox-stepwise-regression/";
             },},{
         id: 'social-email',
         title: 'email',

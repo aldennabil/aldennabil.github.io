@@ -40,7 +40,7 @@ ninja.data = [{
           },
         },{id: "nav-projects",
           title: "projects",
-          description: "A selection of work in statistics, machine learning, and data engineering.",
+          description: "A selection of work in time series forecasting, risk analytics, machine learning, and applied statistics.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/projects/";
@@ -444,21 +444,111 @@ ninja.data = [{
             window.location.href = "/blog/2015/formatting-and-links/";
           
         },
-      },{id: "projects-football-match-outcome-prediction",
+      },{id: "projects-agricultural-sound-classification",
+          title: 'Agricultural Sound Classification',
+          description: "CNN-14 and EfficientNet-B0 with multi-resolution Log-Mel spectrograms for agricultural bioacoustic audio classification — AgriMine 2025.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/agrimine-audio-classification/";
+            },},{id: "projects-bank-customer-churn-amp-membership-prediction",
+          title: 'Bank Customer Churn &amp;amp; Membership Prediction',
+          description: "Supervised classification and imbalanced sampling strategies (SMOTE, Class Weighting) to predict customer churn in retail banking.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bank-membership-prediction/";
+            },},{id: "projects-spatio-temporal-pm2-5-modeling-via-hybrid-xgboost-amp-bayesian-inla-spde",
+          title: 'Spatio-Temporal PM2.5 Modeling via Hybrid XGBoost &amp;amp; Bayesian INLA-SPDE',
+          description: "High-resolution air quality prediction in Jakarta combining machine learning fixed effects with continuous spatial Gaussian Random Fields (INLA-SPDE) and temporal AR(1) dynamics.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bayesian-spatiotemporal-pm25/";
+            },},{id: "projects-industrial-safety-amp-student-ai-impact-analytics",
+          title: 'Industrial Safety &amp;amp; Student AI Impact Analytics',
+          description: "Statistical reporting and incident analytics portfolio developed for the National Professional Certification Board (BNSP) Data Analyst assessment.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bnsp-data-analyst-certification/";
+            },},{id: "projects-coffee-wars-wfc-vs-lifestyle-market-positioning-via-mds-amp-nlp",
+          title: 'Coffee Wars: WFC vs Lifestyle Market Positioning via MDS &amp;amp; NLP',
+          description: "Google Maps reviews scraping, TextBlob sentiment scoring, and 2D Multidimensional Scaling perceptual mapping for coffee shop competitive strategy in Bogor.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bogor-coffeeshop-mds-sentiment/";
+            },},{id: "projects-seasonal-commodity-price-forecasting-ets-vs-lstm",
+          title: 'Seasonal Commodity Price Forecasting: ETS vs. LSTM',
+          description: "Comparative time-series forecasting over 12 years of commodity market data, achieving 3.26% MAPE with an Optuna-optimized ETS model for food security early warnings.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/commodity-price-forecasting-ets-lstm/";
+            },},{id: "projects-cox-proportional-hazards-for-clinical-survival",
+          title: 'Cox Proportional Hazards for Clinical Survival',
+          description: "Semi-parametric survival modeling, Schoenfeld residual diagnostics, and hazard ratio estimation on cardiovascular clinical event data.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/cox-proportional-hazard/";
+            },},{id: "projects-credit-risk-survival-analysis",
+          title: 'Credit Risk Survival Analysis',
+          description: "Non-parametric Kaplan-Meier time-to-event modeling and life-table estimation for customer default and banking churn risk.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/credit-risk-survival-analysis/";
+            },},{id: "projects-superconductor-critical-temperature-optimization-via-elastic-net",
+          title: 'Superconductor Critical Temperature Optimization via Elastic Net',
+          description: "Resolving high multicollinearity on 21,197 samples and 81 predictors using SGD vs custom Proximal Gradient Descent (PGD/ISTA) (R² = 0.733).",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/elasticnet-lgd-optimization/";
+            },},{id: "projects-statistical-consulting-amp-experimental-design-in-agriculture",
+          title: 'Statistical Consulting &amp;amp; Experimental Design in Agriculture',
+          description: "End-to-end experimental design (CRD, RCBD), ANOVA hypothesis testing, and post-hoc Tukey HSD analysis for agricultural and animal husbandry research clients.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/experimental-design-statistical-consulting/";
+            },},{id: "projects-finsight-ai-powered-spending-intelligence-for-digital-banking",
+          title: 'FinSight — AI-Powered Spending Intelligence for Digital Banking',
+          description: "Zero-click banking transaction classification, 10-feature financial persona clustering, and Autoencoder anomaly detection with automated AI coach behavioral reports.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/finsight-spending-intelligence/";
+            },},{id: "projects-football-match-outcome-prediction",
           title: 'Football Match Outcome Prediction',
-          description: "Ensemble machine learning for three-class match result prediction (H/D/A) — 3rd place, GammaFest 2025 Data Science Competition.",
+          description: "End-to-end ML pipeline with Elo rating reconstruction and hybrid LightGBM models across 121,000+ matches — 3rd Winner &amp; Most Applicable, Gammafest 2026.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/football-outcome-prediction-gammafest/";
-            },},{id: "projects-market-research-analytics-platform",
-          title: 'Market Research Analytics Platform',
-          description: "Full-stack statistical system: ETL pipeline, SQLite normative database, and Streamlit dashboard for benchmarking product performance across survey categories.",
+            },},{id: "projects-smartphone-market-web-scraping-amp-pricing-regression",
+          title: 'Smartphone Market Web Scraping &amp;amp; Pricing Regression',
+          description: "Automated web scraping pipeline in R (rvest) extracting smartphone hardware specifications from GSMArena coupled with statistical pricing elasticity modeling.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/gsmarena-smartphone-webscraping-analysis/";
+            },},{id: "projects-hiv-clinical-trial-survival-analysis",
+          title: 'HIV Clinical Trial Survival Analysis',
+          description: "Time-to-event survival modeling on the ACTG 175 clinical trial comparing single vs combined antiretroviral therapies using Python&#39;s lifelines library.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/hiv-clinical-trial-survival/";
+            },},{id: "projects-centralized-normative-database-amp-benchmarking-platform",
+          title: 'Centralized Normative Database &amp;amp; Benchmarking Platform',
+          description: "ETL pipeline, statistical norm calculation engine, and interactive Streamlit analytics platform consolidating 17 survey projects and 8,800+ observations.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/market-research-analytics-platform/";
-            },},{id: "projects-nox-prediction-via-stacked-regression",
-          title: 'NOx Prediction via Stacked Regression',
-          description: "Ensemble stacking of multiple regression learners to predict nitrogen oxide emissions, outperforming all individual base models — DBS Datamatika 2026.",
+            },},{id: "projects-minyakita-price-impact-analysis-via-spatial-clustering",
+          title: 'Minyakita Price Impact Analysis via Spatial Clustering',
+          description: "K-Means and hierarchical clustering on 38 Indonesian provinces to evaluate the market stabilization effect of government-subsidized Minyakita on packaged cooking oil prices.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/minyakita-price-impact-clustering/";
+            },},{id: "projects-nox-emission-prediction-via-stacked-regression",
+          title: 'NOx Emission Prediction via Stacked Regression',
+          description: "Two-layer stacked ensemble for gas turbine NOx emissions, optimizing sensor multicollinearity for industrial compliance — DBS Datamatika 2026.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/nox-prediction-stacked-regression/";
+            },},{id: "projects-public-service-dissatisfaction-risk-modeling",
+          title: 'Public Service Dissatisfaction Risk Modeling',
+          description: "Statistical risk scoring, logistic classification, and priority segmentation matrices to identify drivers of citizen dissatisfaction across municipal public services.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/public-service-satisfaction-risk/";
+            },},{id: "projects-skincare-product-sentiment-analysis",
+          title: 'Skincare Product Sentiment Analysis',
+          description: "NLP sentiment analysis on Indonesian e-commerce consumer reviews comparing lexicon-based TextBlob with fine-tuned IndoBERT embeddings.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/skincare-sentiment-nlp/";
+            },},{id: "projects-regional-stunting-determinants-via-spatial-error-modeling-sem",
+          title: 'Regional Stunting Determinants via Spatial Error Modeling (SEM)',
+          description: "Spatial econometric modeling comparing Ordinary Least Squares (OLS) and Spatial Error Models (SEM) to identify regional determinants of stunting prevalence in Central Java.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/spatial-regression-stunting-sem/";
+            },},{id: "projects-regional-economic-growth-modeling-via-box-cox-amp-stepwise-regression",
+          title: 'Regional Economic Growth Modeling via Box-Cox &amp;amp; Stepwise Regression',
+          description: "Econometric modeling of regional economic growth across Java Island using BPS SUSENAS 2023 microdata with Box-Cox power transformations and stepwise feature selection.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/susenas-boxcox-stepwise-regression/";
             },},{
         id: 'social-email',
         title: 'email',
